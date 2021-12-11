@@ -1,0 +1,25 @@
+plugins:
+  - jekyll-seo-tag
+  
+collections:
+  catalog:
+    output: false
+
+social:
+  name: BRUT
+  links:
+    - https://www.facebook.com/brut
+    - https://www.instagram.com/brut/
+
+logo: /images/logo.jpg
+url: https://brut.notstupid.name
+
+title: ""
+lang: "ru_RU"
+
+defaults:
+  -
+    scope:
+      path: ""
+    values:
+      image: /images/logo.jpg

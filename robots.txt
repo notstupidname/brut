@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /
+Host: https://brut.notstupid.name
+Sitemap: https://brut.notstupid.name/sitemap.xml
