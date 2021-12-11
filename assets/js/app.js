@@ -111,62 +111,62 @@
 
     // Form submitting
 
-    const form = document.querySelector('.ajax-form');
+    // const form = document.querySelector('.ajax-form');
 
-    form.addEventListener('submit', function(e) {
-        e.preventDefault();
-        const url = "https://notstupidapp.ew.r.appspot.com/shopapi/v2/porolonych"
+    // form.addEventListener('submit', function(e) {
+    //     e.preventDefault();
+    //     const url = "https://notstupidapp.ew.r.appspot.com/shopapi/v2/porolonych"
 
-        const form_loading = this.parentNode.querySelector('.form-loading');
-        const form_success = this.parentNode.querySelector('.form-success');
-        const form_error = this.parentNode.querySelector('.form-error');
-        const payload = {
-            name: this.elements["name"].value,
-            email: this.elements["email"].value,
-            phone: this.elements["phone"].value,
-            shipping: this.elements["shipping"].value,
-            message: this.elements["message"].value,
-            cart_sum: this.elements["cartstring"].value,
-            cart: cartApi.listCart()
-        }
-        this.classList.add('hide');
-        form_loading.classList.remove('hide');
-        form_loading.classList.add('fade-in');
+    //     const form_loading = this.parentNode.querySelector('.form-loading');
+    //     const form_success = this.parentNode.querySelector('.form-success');
+    //     const form_error = this.parentNode.querySelector('.form-error');
+    //     const payload = {
+    //         name: this.elements["name"].value,
+    //         email: this.elements["email"].value,
+    //         phone: this.elements["phone"].value,
+    //         shipping: this.elements["shipping"].value,
+    //         message: this.elements["message"].value,
+    //         cart_sum: this.elements["cartstring"].value,
+    //         cart: cartApi.listCart()
+    //     }
+    //     this.classList.add('hide');
+    //     form_loading.classList.remove('hide');
+    //     form_loading.classList.add('fade-in');
 
-        let request = new XMLHttpRequest();
-        request.open('POST', url);
+    //     let request = new XMLHttpRequest();
+    //     request.open('POST', url);
 
-        request.onload = function() {
-            if (this.status >= 200 && this.status < 400) {
-                try {
-                    yaCounter15918124.reachGoal('order');
-                } catch (error) {
-                    console.error(error);
-                }
-                console.log('Success');
-                console.log(this.responseText);
-                form_loading.classList.add('hide');
-                form_success.classList.remove('hide');
-                form_success.classList.add('fade-in');
-                cartApi.clearCart();
-                displayCart();
-                updateCounts();
-            } else {
-                // We reached our target server, but it returned an error
-                console.log('Server returned error');
-                form_loading.classList.add('hide');
-                form_error.classList.remove('hide');
-                form_error.classList.add('fade-in');
-            }
-        };
-        request.onerror = function() {
-            console.log('Connection error');
-            form_loading.classList.add('hide');
-            form_error.classList.remove('hide');
-            form_error.classList.add('fade-in');
-        };
-        request.send(JSON.stringify(payload));
+    //     request.onload = function() {
+    //         if (this.status >= 200 && this.status < 400) {
+    //             try {
+    //                 yaCounter15918124.reachGoal('order');
+    //             } catch (error) {
+    //                 console.error(error);
+    //             }
+    //             console.log('Success');
+    //             console.log(this.responseText);
+    //             form_loading.classList.add('hide');
+    //             form_success.classList.remove('hide');
+    //             form_success.classList.add('fade-in');
+    //             cartApi.clearCart();
+    //             displayCart();
+    //             updateCounts();
+    //         } else {
+    //             // We reached our target server, but it returned an error
+    //             console.log('Server returned error');
+    //             form_loading.classList.add('hide');
+    //             form_error.classList.remove('hide');
+    //             form_error.classList.add('fade-in');
+    //         }
+    //     };
+    //     request.onerror = function() {
+    //         console.log('Connection error');
+    //         form_loading.classList.add('hide');
+    //         form_error.classList.remove('hide');
+    //         form_error.classList.add('fade-in');
+    //     };
+    //     request.send(JSON.stringify(payload));
 
-    }, false);
+    // }, false);
 
 })();
