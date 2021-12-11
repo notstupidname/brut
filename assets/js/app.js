@@ -5,9 +5,6 @@
     const nav = document.querySelector('#nav');
     const navToggle = document.querySelector('a[href="#nav"]');
     const navClose = document.querySelector('#nav .close');
-    const cart = document.querySelector('#cart');
-	const cartToggles= document.querySelectorAll('a[href="#cart"]');
-    const cartClose = document.querySelector('#cart .close');
     const backToTop = document.querySelector('#backtotop');
 
     window.addEventListener('load', function() {
@@ -41,15 +38,10 @@
             e.preventDefault();
             e.stopPropagation();
             hideNav();
-            hideCart();
         }
     }, false);
 
     nav.addEventListener('click', function(e){
-        e.stopPropagation();
-    }, false);
-
-    cart.addEventListener('click', function(e){
         e.stopPropagation();
     }, false);
 
@@ -64,20 +56,6 @@
         hideNav();
     }, false);
     
-    for (const cartToggle of cartToggles) {
-        cartToggle.addEventListener('click', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            toggleCart();
-        }, false);
-    }
-
-    cartClose.addEventListener('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        hideCart();
-    }, false);
-
     let transition = function(e) {
         let href = this.getAttribute('href');
         let target = this.getAttribute('target');
@@ -128,244 +106,8 @@
         }, false);
     }
 
-    // Cart related UI
-    ///////
-    function numberWithSpaces(x) {
-        return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ");
-    }
 
-    function createCartItem(item){
-        let cart_item = document.createElement('div');
-        cart_item.id = item.id;
-        cart_item.classList.add('cart-item');
-        let a_img = document.createElement('a');
-        a_img.href = item.url;
-        cart_item.appendChild(a_img);
-        let img = document.createElement('img');
-        img.classList.add('image');
-        img.src = "/images" + item.url + "-01_400w.jpg";
-        // img.src = "/images/catalog/porolon/porolon-el-4060.jpg";
-        a_img.appendChild(img);
-        let cart_text = document.createElement('div');
-        cart_text.classList.add('cart-text');
-        cart_item.appendChild(cart_text);
-        let el = document.createElement('a');
-        el.href = item.url;
-        el.innerText = item.title;
-        cart_text.appendChild(el);
-        el = document.createElement('h3');
-        el.innerText = numberWithSpaces(item.price) + " ₽";
-        cart_text.appendChild(el);
-        let some_div = document.createElement('div');
-        cart_text.appendChild(some_div);
-        el = document.createElement('a');
-        el.classList.add('minus-item', 'button');
-        el.setAttribute('data', item.id);
-        el.innerText = "-";
-        some_div.appendChild(el);
-        el = document.createElement('input');
-        el.classList.add('count');
-        el.setAttribute('data', item.id);
-        el.setAttribute('type', 'number')
-        el.setAttribute('min', 1)
-        el.value = item.count;
-        some_div.appendChild(el);
-        el = document.createElement('a');
-        el.classList.add('plus-item', 'button');
-        el.setAttribute('data', item.id);
-        el.innerText = "+";
-        some_div.appendChild(el);
-        return cart_item;
-    }
-
-    // Update all cart UI
-    function displayCart(){
-        const cart = cartApi.listCart();
-        const cartInnerEl = document.querySelector('.show-cart');
-        cartInnerEl.innerHTML = "";
-        let temp_cart = document.createDocumentFragment();
-        for (const item of cart){
-            let cart_item = createCartItem(item);
-            temp_cart.appendChild(cart_item);
-        }
-        cartInnerEl.appendChild(temp_cart);
-    };
-    displayCart();
-
-    function updateCounts(){
-        const totalCart = cartApi.totalCart();
-        const totalCount = cartApi.totalCount();
-        
-        const cartTotalCounts = document.querySelectorAll('.total-count');
-        for (const cartTotalCount of cartTotalCounts) {
-            cartTotalCount.innerText = totalCount;
-        }
-
-        const cartTotal = document.querySelector('.total-cart');
-        cartTotal.innerText = numberWithSpaces(totalCart);
-
-        const orderButton = document.querySelector('.order');
-        const floatCart = document.querySelector('.cart.float');
-        if (totalCount > 0 && orderButton.classList.contains('disabled')){
-            orderButton.classList.remove('disabled');
-        } else if (totalCount == 0 && !orderButton.classList.contains('disabled')){
-            orderButton.classList.add('disabled');
-        }
-        if (totalCount > 0 && floatCart.classList.contains('disabled')){
-            floatCart.classList.remove('disabled');
-        } else if (totalCount == 0 && !floatCart.classList.contains('disabled')){
-            floatCart.classList.add('disabled');
-        }
-        const cartString = document.querySelector('.cart-string');
-        cartString.setAttribute('value', totalCart)
-    };
-    updateCounts();
-
-    const orderButton = document.querySelector('.order');
-    const returnButtonAll = document.querySelectorAll('.return-to-cart');
-    const cart_cart = document.querySelector('.cart-cart');
     const form_wrapper = document.querySelector('.form-wrapper');
-
-    orderButton.addEventListener('click', function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        if (!this.classList.contains('disabled')){
-            cart_cart.classList.add('hide');
-            form_wrapper.classList.remove('hide');
-            form_wrapper.classList.add('fade-in');
-        }
-    })
-
-    for (const returnButton of returnButtonAll) {
-        returnButton.addEventListener('click', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            form_wrapper.classList.add('hide');
-            cart_cart.classList.remove('hide');
-            cart_cart.classList.add('fade-in');
-            const parent = this.parentNode;
-            if (parent.classList.contains('form-success') || parent.classList.contains('form-error')) {
-                const ajax_form = document.querySelector('.ajax-form');
-                parent.classList.add('hide');
-                ajax_form.classList.remove('hide');
-                ajax_form.classList.add('fade-in');
-            }
-        })
-    }
-
-    // Add to cart on Product page
-    const select = document.querySelector('#param_select');
-    const products_listEL = document.getElementById('products_list');
-    if (products_listEL){
-        var products_list = JSON.parse(products_listEL.textContent);
-    }
-    const addToCartButton = document.querySelector('.add-to-cart');
-    if (addToCartButton) {
-        addToCartButton.addEventListener('click', function(e){
-            e.preventDefault();
-            e.stopPropagation();
-            let selected_product;
-            if (select) {
-                for (const product of products_list) {
-                    if (product.id == select.value) {
-                        selected_product = product;
-                        break;
-                    }
-                }
-            } else {
-                selected_product = products_list[0];
-            }
-            if (cartApi.totalCount() == 0){
-                toggleCart();
-            }
-            cartApi.addNewItemToCart(selected_product.id, selected_product.title, selected_product.price, selected_product.url, 1);
-            displayCart();
-            updateCounts();
-            let button = this;
-            button.innerHTML = 'Добавлено';
-            window.setTimeout(function() {
-                button.innerHTML = 'В корзину';
-            }, 2500, button);
-        }, false);
-    }
-
-    // Select behavior on Product page
-    if (select) {
-        select.addEventListener('change', function(e){
-            // console.log(select.value);
-            for (const product of products_list) {
-                if (product.id == select.value) {
-                    const price_span = document.getElementById('price');
-                    price_span.textContent = product.price;
-                    break;
-                }
-            }
-        }, false);
-    }
-
-    // Select on Category page
-    const all_selects = document.querySelectorAll('.price-select');
-    if (all_selects){
-        for (const current_select of all_selects) {
-            current_select.addEventListener('change', function(e){
-                const this_price = this.parentNode.parentNode.querySelector('span');
-                this_price.textContent = current_select.value;
-            }, false);
-        }
-    }
-
-    let cartPlusMinusButton = function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        const item_id = this.getAttribute('data');
-        let count = this.parentNode.querySelector('input');
-        if (this.classList.contains('plus-item')){
-            count.value = cartApi.addItemToCart(item_id);
-        } else {
-            const item_count = cartApi.removeItemFromCart(item_id);
-            if (item_count > 0){
-                count.value = item_count;
-            } else {
-                // Remove .cart-item from cart completly
-                const cart_item = this.parentNode.parentNode.parentNode;
-                cart_item.parentNode.removeChild(cart_item);
-            }
-        }
-        updateCounts();
-    }
-
-    // Plus and Minus buttons behavior in Cart
-    cart.addEventListener('click', function(e) {
-        for (let target = e.target; target && target != this; target = target.parentNode) {
-            if (target.matches('.minus-item, .plus-item')) {
-                cartPlusMinusButton.call(target, e);
-                break;
-            }
-        }
-    }, false);
-
-    let cartSetCount = function(e){
-        e.preventDefault();
-        e.stopPropagation();
-        const item_id = this.getAttribute('data');
-        if (parseInt(this.value) > 0){
-            cartApi.setCountForItem(item_id, parseInt(this.value));
-        } else {
-            const cart_item = this.parentNode.parentNode.parentNode;
-            cart_item.parentNode.removeChild(cart_item);
-            cartApi.removeItemFromCartAll(item_id);
-        }
-        updateCounts();
-    }
-
-    cart.addEventListener('change', function(e) {
-        for (let target = e.target; target && target != this; target = target.parentNode) {
-            if (target.matches('.count')) {
-                cartSetCount.call(target, e);
-                break;
-            }
-        }
-    }, false);
 
     // Form submitting
 
