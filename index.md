@@ -1,7 +1,7 @@
 ---
 title: Brut.studio - Архитектура, которую ты заслужил.
 description: В этом году ты плохо себя вёл, поэтому Дед Мороз принёс тебе вместо подарка нас. Страдай, тебе же это нравится.
-layout: empty
+layout: generic
 permalink: /
 
 page_title: Brut.studio - Архитектура, которую ты заслужил
