@@ -22,16 +22,6 @@
         body.classList.toggle('menu-visible');
     }
 
-    let hideCart = function() {
-        cart.classList.remove('visible');
-        body.classList.remove('menu-visible');
-    }
-
-    let toggleCart = function() {
-        cart.classList.toggle('visible');
-        body.classList.toggle('menu-visible');
-    }
-    
     //Hide nav and cart on body click
     body.addEventListener('click', function(e){
         if (body.classList.contains('menu-visible')) {
@@ -64,7 +54,6 @@
         e.preventDefault();
         e.stopPropagation();
         hideNav();
-        hideCart();
         body.classList.add('trans');
         window.setTimeout(function() {
             window.location.href = href;
