@@ -1,0 +1,57 @@
+---
+title: Brut.studio - Архитектура, которую ты заслужил.
+description: В этом году ты плохо себя вёл, поэтому Дед Мороз принёс тебе вместо подарка нас. Страдай, тебе же это нравится.
+layout: empty
+permalink: /
+---
+<style>
+    #banner {
+        position: fixed;
+        height: 100vh;
+        width: 100vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+        #banner img {
+            position: absolute;
+            height: 100vh;
+            width: 100vw;
+            object-fit: cover;
+            filter: grayscale(0.5) brightness(0.3) contrast(1.1);
+            z-index:-1;
+        }
+
+    header {
+        text-align: center;
+    }
+
+        header h1 {
+            font-size: 4em;
+            margin-bottom: 0.2em;
+            font-family:'Roboto Mono';
+        }
+
+        header p {
+            font-size: 1.5em;
+            line-height: 1.5em;
+            font-family:'Oswald';
+        }
+
+        @media screen and (max-width: 480px) {
+            header h1 {
+                font-size: 3em;
+            }
+            header p {
+                font-size: 1.3em;
+            }
+        }
+</style>
+<div id="banner">
+    <img src="/images/pic1.jpg"/>
+    <header>
+        <h1>BRUT_studio</h1>
+        <p>Архитектура, которую ты заслужил</p>
+    </header>
+</div>
