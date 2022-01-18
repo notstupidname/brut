@@ -2,7 +2,7 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@300;325;350;375;400;500&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Mono&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400&display=swap');
@@ -161,8 +161,8 @@
 	}
 
 	h1, h2, h3, h4, h5, h6 {
-		font-family: 'Oswald', sans-serif;
-		font-weight: 400;
+		font-family: 'Roboto Mono', monospace;
+		font-weight: 350;
 		line-height: 1.5;
 		margin: 0 0 1em 0;
 	}
