@@ -884,8 +884,9 @@
 	}
 
 	#backtotop {
-		font-family: 'Oswald', sans-serif;
+		font-family: 'Roboto Mono', monospace;
 		font-size: 1.5em;
+		font-weight: 300;
 		display: block;
 		margin-top: 1em;
 		text-align: right;
@@ -1071,7 +1072,7 @@ header.mobile {
 	#nav  ul.links {
 		list-style: none;
 		padding: 0;
-		margin: 0 0 2em 0;
+		margin: 0 0 4em 0;
 		/* text-align: left; */
 		font-weight: 400;
 	}
@@ -1320,10 +1321,13 @@ header.mobile {
 
 	.main-header {
 		font-size: 2em;
+		border-bottom: solid 1px var(--text-color);
+		margin-bottom: 1.4em;
 	}
 
 		.main-header h1 {
 			line-height: 1em;
+			margin-bottom: 0;
 		}
 	
 		.main-header.index {
