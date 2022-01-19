@@ -402,7 +402,6 @@
 	border: 0;
 	display: inline-block;
 	position: relative;
-	border-radius: 5px;
 }
 
 	.image img {
@@ -1039,7 +1038,6 @@ header.mobile {
 	align-items: center;
 	justify-content: space-between;
 	text-align:center;
-	background: var(--back-color);
 	font-family: 'Roboto Mono', monospace;
 	padding: 2rem 2rem 2rem;
 }
@@ -1151,6 +1149,7 @@ header.mobile {
 				-ms-transform: translateX(-25em);
 				transform: translateX(-25em);
 				padding-top: 4em;
+				background: var(--back-color);
 			}
 			
 			#nav .close {
